@@ -19,6 +19,7 @@ public class EjectaGLSurfaceView extends GLSurfaceView {
 		super(context);
 		//Sets OpenGLES 2.0 to be used
         setEGLContextClientVersion(2);
+        setEGLConfigChooser(5,6,5,0,16,8); // This is the minimally supported config for Android EGL devices
 		// TODO Auto-generated constructor stub
 		mRenderer = new EjectaRenderer(context, width, height);
         setRenderer(mRenderer);
@@ -26,15 +27,16 @@ public class EjectaGLSurfaceView extends GLSurfaceView {
         super.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+            	int id = motionEvent.getPointerId(motionEvent.getActionIndex());
                 switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
                     case MotionEvent.ACTION_DOWN:
-                        mRenderer.nativeTouch(motionEvent.getAction(), (int)motionEvent.getX(), (int)motionEvent.getY());
+                        mRenderer.nativeTouch(motionEvent.getAction(), (int)motionEvent.getX(), (int)motionEvent.getY(), id);
                         break;
                     case MotionEvent.ACTION_UP:
-                        mRenderer.nativeTouch(motionEvent.getAction(), (int)motionEvent.getX(), (int)motionEvent.getY());
+                        mRenderer.nativeTouch(motionEvent.getAction(), (int)motionEvent.getX(), (int)motionEvent.getY(), id);
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        mRenderer.nativeTouch(motionEvent.getAction(), (int)motionEvent.getX(), (int)motionEvent.getY());
+                        mRenderer.nativeTouch(motionEvent.getAction(), (int)motionEvent.getX(), (int)motionEvent.getY(), id);
                         break;
                 }
                 // Get all touches, return true
