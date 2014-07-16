@@ -33,15 +33,9 @@
 
 using namespace std;
 
-#define EJECTA_VERSION "0.2.1"
-#define EJECTA_APP_FOLDER "www/"
-
-<<<<<<< HEAD
-=======
 #define EJECTA_VERSION "0.8.0"
 #define EJECTA_APP_FOLDER "www/"
 
->>>>>>> upstream/master
 class EJBindingBase;
 class EJTimerCollection;
 class EJCanvasContext;
@@ -55,10 +49,6 @@ class EJApp : public NSObject {
 private:
 
     BOOL paused;
-
-    JavaVM *jvm;
-    jobject g_obj;
-
     NSDictionary *jsClasses;
     EJTimerCollection *timers;
     long currentTime;

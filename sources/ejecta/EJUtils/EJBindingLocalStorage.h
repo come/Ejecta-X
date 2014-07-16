@@ -17,7 +17,7 @@ public:
     REFECTION_CLASS_IMPLEMENT_DEFINE(EJBindingLocalStorage);
 
     virtual string superclass(){ return EJBindingBase::toString();};
-    virtual void init(JSContextRef ctx, JSObjectRef obj, size_t argc, const JSValueRef argv[]);
+    virtual void initWithContext(JSContextRef ctx, JSObjectRef obj, size_t argc, const JSValueRef argv[]);
 
     EJ_BIND_FUNCTION_DEFINE(getItem, ctx, argc, argv );
     EJ_BIND_FUNCTION_DEFINE(setItem, ctx, argc, argv );

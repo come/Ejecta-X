@@ -1,13 +1,15 @@
 #include "EJBindingLocalStorage.h"
 
-void EJBindingLocalStorage::init(JSContextRef ctx, JSObjectRef obj, size_t argc, const JSValueRef argv[]) {
-    
-    _g_obj = EJApp::instance()->g_obj;
-    
-    env = NULL;
-    EJApp::instance()->jvm->GetEnv((void**)&env, JNI_VERSION_1_6);
-    
-    javaCallerClass = env->GetObjectClass(_g_obj);
+void EJBindingLocalStorage::initWithContext(JSContextRef ctxp, JSObjectRef obj, size_t argc, const JSValueRef argv[]) {
+	_g_obj = EJApp::instance()->g_obj;
+	
+	env = NULL;
+	EJApp::instance()->jvm->GetEnv((void**)&env, JNI_VERSION_1_6);
+	
+	jclass tmp  = env->GetObjectClass(_g_obj);
+	javaCallerClass = (jclass)env->NewGlobalRef(tmp);
+
+	env->DeleteLocalRef(tmp);
 }
 
 EJBindingLocalStorage::EJBindingLocalStorage() {
